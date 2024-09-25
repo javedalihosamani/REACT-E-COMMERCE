@@ -1,8 +1,12 @@
 import React from 'react'
+import {Header, Footer} from '../layout'
 
 const Contact = () => {
   return (
-    <div>Contact</div>
+    <>
+    <Header/>
+    <Footer/>
+    </>
   )
 }
 
