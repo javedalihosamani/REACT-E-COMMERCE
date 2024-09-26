@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="row">
                 <div className="col p-5 text-center">
                     <p className='text-dark fs-5'>Copyright © 2024, Javed Ali</p>
-                    <a href="https://github.com/javedalihosamani" className='text-dark fs-4'>
+                    <a href="https://github.com/javedalihosamani" target='_blank' className='text-dark fs-4'>
                         <FontAwesomeIcon icon={faGithub} />
                     </a>
                 </div>

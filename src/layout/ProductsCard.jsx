@@ -12,7 +12,7 @@ const ProductsCard = (props) => {
                 <img className="card-img-top" src={image} alt="Title" height={200}/>
                 <div className="card-body text-center">
                     <h4 className="card-title bg-white p-3 border-radius">{title.substring(0, 12)} ...</h4>
-                    <p className="card-text">{description.substring(0 ,60)}</p>
+                    <p className="card-text">{description.substring(0 ,60)} ...</p>
                     
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item lead">$ {price}</li>
