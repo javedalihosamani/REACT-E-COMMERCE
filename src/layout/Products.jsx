@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import ProductsCard from './ProductsCard';
 import Loading from './Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { readAllProduct } from '../redux/action/ProductAction';
 
 const Product = () => {
   const [data, setData] = useState([]);
@@ -26,6 +28,23 @@ const Product = () => {
     }
     getProducts();
   },[]);
+
+  // REDUX-CODE FETCH ALL PRODUCTS
+/*   const dispatch = useDispatch();
+  useEffect(() => {
+    setTimeout(()=>{setLoading(true)}, 10000);
+    dispatch(readAllProduct());
+    if(componentMounted){
+      setData(apiData);
+      setFilter(apiData);
+      setLoading(false);
+    }
+    return () => {
+      componentMounted = false;
+    }
+  }, [ dispatch]);
+
+  const apiData = useSelector(product => product.ECOMMERCE_PRODUCTS); */
 
   // Filter Products
   const filterProducts = (category) => {

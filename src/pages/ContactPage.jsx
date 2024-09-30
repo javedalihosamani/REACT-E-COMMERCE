@@ -19,15 +19,15 @@ const Contact = () => {
           <div className="border rounded p-3 shadow">
             <form>
               <div className="form-group my-3">
-                <label for="name">Name</label>
+                <label>Name</label>
                 <input type="text" className="form-control" id="name" name='name' placeholder="Enter name" required />
               </div>
               <div className="form-group my-3">
-                <label for="email">Email</label>
+                <label>Email</label>
                 <input type="email" className="form-control" id="email" name='email' placeholder="Enter email" required />
               </div>
               <div className="form-group my-3">
-                <label for="message">Message</label>
+                <label>Message</label>
                 <textarea className="form-control" id="message" name='message' rows="3" placeholder="Enter message" required></textarea>
               </div>
               <div className="form-group my-3 text-center">
