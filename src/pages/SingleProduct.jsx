@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import Skeleton from 'react-loading-skeleton';
 import Marquee from "react-fast-marquee";
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Product = () => {
 
@@ -12,40 +14,34 @@ const Product = () => {
   const [product, setProduct] = useState([]);
   const [similarProduct, setSimilarProduct] = useState([]);
   const [loading, setLoading] = useState(false);
-  // console.table(product);
+  //console.table(similarProduct);
 
   useEffect(()=>{
     const getProduct = async () => {
       setLoading(true);
       // Fetch data from API
-      await fetch(`https://fakestoreapi.com/products/${id}`)
-      .then(response => response.json())
-      .then(data => {
-          setProduct(data);
-          setLoading(false);
-        })
-      .catch(error => console.error('Error:', error));
+      await axios.get(`https://fakestoreapi.com/products/${id}`)
+      .then(response =>{
+        setProduct(response.data);
+        setLoading(false);
+      }).catch(error => toast.error(error.message))
+
+      await axios.get(`https://fakestoreapi.com/products/category/${product.category}`)
+       .then(res=>{
+        // console.log(res.data);
+        setSimilarProduct(res.data);
+        setLoading(false); 
+      }).catch(error => toast.error(error.message))
     };
     getProduct();
 
-    const getSimilarProduct = async () => {
-      setLoading(true);
-      // Fetch data from API
-      await fetch(`https://fakestoreapi.com/products/category/${product.category}`)
-      .then(response => response.json())
-      .then(data => {
-          setSimilarProduct(data);
-          setLoading(false);
-        })
-      .catch(error => console.error('Error:', error));
-    };
-    getSimilarProduct()
     /* Fetch data from Redux Store
     dispatch(readProduct(id));
     const product = useSelector(state => state.product.products.find(p => p.id === parseInt(id)));
     if(product) setProduct(product);
     setLoading(false); */
-  },[]);
+
+  },[id, product.category]);
 
   // User Defined  Method
   const ShowProduct = () => {
@@ -64,7 +60,9 @@ const Product = () => {
           <h4 className='display-6 my-4'>Price: ${product.price}</h4>
           <p className='lead'>{product.description}</p>
           <button className="btn btn-outline-dark my-4">Add to Cart</button>
-          <NavLink className="btn btn-outline-dark mx-4">Go to Cart</NavLink>
+          <NavLink>
+            <button className="btn btn-outline-dark mx-4">Go to Cart</button>
+          </NavLink>
           {loading && <div>Loading...</div>}
         </div>
       </>
@@ -85,6 +83,39 @@ const Product = () => {
     )
   }
 
+  // Show Similar Product
+  const ShowSimilarProduct = () => {
+    return(
+      <>
+        <div className="d-flex">
+        {
+          similarProduct.map((product, index) => 
+          {
+            return(
+              <div key={index} className="card p-2 m-2">
+                <img className="card-img-top" src={product.image} alt={product.title} height={100} width={100}/>
+                <div className="card-body">
+                  <h4 className="card-title">{product.title.substring(0,15)} ...</h4>
+                  <hr />
+                  <p className="lead">
+                    {product.rating && product.rating.rate}
+                    <FontAwesomeIcon icon={faStar} />
+                    <span className='float-end'>Price: ${product.price}</span>
+                  </p>
+                  <NavLink>
+                    <button className="btn btn-outline-dark btn-sm">Buy Now</button>
+                  </NavLink>
+                  <NavLink>
+                    <button className="btn btn-outline-dark btn-sm float-end">Add to Cart</button>
+                  </NavLink>
+                </div>
+              </div>)
+          }) 
+        }
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -101,33 +132,12 @@ const Product = () => {
             <hr />
           </div>
         </div>
-        <div className="row">
+        <div className="row my-3 py-3">
           <Marquee pauseOnHover={true} pauseOnClick={true} speed={50}>
             {
-              loading? <Loading /> : similarProduct.map((product, index) => (
-                <div key={index} className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 my-3">
-                  <div class="card text-start p-2">
-                    <img class="card-img-top" src={product.image} alt={product.title} height="300"/>
-                    <div class="card-body">
-                      <h4 class="card-title">{product.title.substring(0,15)} ...</h4>
-                      <hr />
-                      <p class="lead">
-                        {product.rating && product.rating.rate}
-                        <FontAwesomeIcon icon={faStar} />
-                        <span className='float-end'>Price: ${product.price}</span>
-                      </p>
-                      <NavLink>
-                        <button className="btn btn-outline-dark btn-sm">Buy Now</button>
-                      </NavLink>
-                      <NavLink>
-                        <button className="btn btn-outline-dark btn-sm float-end">Add to Cart</button>
-                      </NavLink>
-                    </div>
-                  </div>
-                </div>
-              ))
+              loading ? <Loading /> : <ShowSimilarProduct/>
             }
-          </Marquee>
+          </Marquee>      
         </div>
       </div>
       <Footer/>
