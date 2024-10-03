@@ -72,7 +72,7 @@ const Product = () => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container my-3">
         <div className="row">
           {
             filter.map(product => {return(

@@ -13,7 +13,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
-    <div className="container mb-5">
+    <div className="container my-3">
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-12 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6 offset-xxl-3 col-xxl-6">
           <div className="border rounded p-3 shadow">

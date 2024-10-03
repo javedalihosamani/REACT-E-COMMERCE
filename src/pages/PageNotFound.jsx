@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from './../layout/Header';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAddressBook, faAddressCard, faHouse } from '@fortawesome/free-solid-svg-icons';

@@ -29,19 +29,19 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="navbar-nav ms-auto my-2 text-center">
-                    <NavLink> 
+                    <NavLink to={`/login`}> 
                         <button className="btn btn-outline-dark m-2">
                             <FontAwesomeIcon icon={faRightToBracket} />
                             &nbsp;Login
                         </button>                        
                     </NavLink>
-                    <NavLink>
+                    <NavLink to={`/register`}>
                         <button className="btn btn-outline-dark m-2">
                             <FontAwesomeIcon icon={faUserPlus} />
                             &nbsp;Register
                         </button>
                     </NavLink>
-                    <NavLink>
+                    <NavLink to={`/cart`}>
                         <button className="btn btn-outline-dark m-2">
                             <FontAwesomeIcon icon={faCartShopping} />
                             &nbsp;Cart

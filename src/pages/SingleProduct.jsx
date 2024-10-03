@@ -16,6 +16,11 @@ const Product = () => {
   const [loading, setLoading] = useState(false);
   //console.table(similarProduct);
 
+  // User Defined Method
+  const addProduct = (product) => {
+    alert("Product Added"+ product);
+  };
+
   useEffect(()=>{
     const getProduct = async () => {
       setLoading(true);
@@ -59,8 +64,8 @@ const Product = () => {
           </p>
           <h4 className='display-6 my-4'>Price: ${product.price}</h4>
           <p className='lead'>{product.description}</p>
-          <button className="btn btn-outline-dark my-4">Add to Cart</button>
-          <NavLink>
+          <button className="btn btn-outline-dark my-4" onClick={()=>addProduct(product)}>Add to Cart</button>
+          <NavLink to={`/cart`}>
             <button className="btn btn-outline-dark mx-4">Go to Cart</button>
           </NavLink>
           {loading && <div>Loading...</div>}
@@ -102,11 +107,11 @@ const Product = () => {
                     <FontAwesomeIcon icon={faStar} />
                     <span className='float-end'>Price: ${product.price}</span>
                   </p>
-                  <NavLink>
+                  <NavLink to={`/product/${product.id}`}>
                     <button className="btn btn-outline-dark btn-sm">Buy Now</button>
                   </NavLink>
                   <NavLink>
-                    <button className="btn btn-outline-dark btn-sm float-end">Add to Cart</button>
+                    <button className="btn btn-outline-dark btn-sm float-end" onClick={()=> addProduct(product)}>Add to Cart</button>
                   </NavLink>
                 </div>
               </div>)

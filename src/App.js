@@ -1,6 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import {Home, About, Contact, Products, Product, PageNotFound} from './pages';
+import {
+  Home,
+  About,
+  Contact,
+  Products,
+  Product,
+  PageNotFound,
+  Register,
+  Login,
+  Cart,
+} from "./pages";
 
 function App() {
   return (
@@ -11,6 +21,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/product" element={<Products />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
