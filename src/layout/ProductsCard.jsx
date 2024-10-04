@@ -1,10 +1,22 @@
 import { faCartShopping, faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
+import { addCart } from "../redux/action/ProductAction";
+import { toast } from "react-toastify";
 
 const ProductsCard = (props) => {
     const {id, image, title, description, price} = props;
+    
+    const dispatch = useDispatch();
+
+    const addToCart = (product) => {
+        console.log(product);
+        dispatch(addCart(product));
+        toast.success("Product added to cart!");
+    };
+
  return(
     <Fragment>
         <NavLink to={`/product/${id}`} className="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 my-3 text-decoration-none">
@@ -22,7 +34,7 @@ const ProductsCard = (props) => {
                     <NavLink to={`/product/${id}`}>
                         <FontAwesomeIcon icon={faMoneyCheckDollar} className="btn btn-outline-dark btn-lg"/>
                     </NavLink>
-                    <NavLink className="float-end">
+                    <NavLink className="float-end" onClick={()=>{addToCart(props)}}>
                         <FontAwesomeIcon icon={faCartShopping}  className="btn btn-outline-dark btn-lg"/>
                     </NavLink>
                 </div>
