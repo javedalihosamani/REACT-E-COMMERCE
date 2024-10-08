@@ -1,9 +1,11 @@
 import { faCartShopping, faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 const Header = () => {
+    const storeLength = useSelector(item => item.handleCart);
   return (
     <nav className='navbar navbar-expand-lg navbar-light bg-light shadow sticky-top'>
         <div className="container">
@@ -44,7 +46,7 @@ const Header = () => {
                     <NavLink to={`/cart`}>
                         <button className="btn btn-outline-dark m-2">
                             <FontAwesomeIcon icon={faCartShopping} />
-                            &nbsp;Cart
+                            &nbsp;Cart ({storeLength.length})
                         </button>
                     </NavLink>
                 </div>

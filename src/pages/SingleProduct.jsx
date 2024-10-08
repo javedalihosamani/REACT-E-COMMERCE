@@ -7,6 +7,8 @@ import Skeleton from 'react-loading-skeleton';
 import Marquee from "react-fast-marquee";
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { addCart } from '../redux/action/ProductAction';
 
 const Product = () => {
 
@@ -16,9 +18,11 @@ const Product = () => {
   const [loading, setLoading] = useState(false);
   //console.table(similarProduct);
 
+  const dispatch = useDispatch();
+
   // User Defined Method
   const addProduct = (product) => {
-    alert("Product Added"+ product);
+    dispatch(addCart(product));
   };
 
   useEffect(()=>{

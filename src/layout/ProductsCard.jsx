@@ -4,7 +4,6 @@ import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { addCart } from "../redux/action/ProductAction";
-import { toast } from "react-toastify";
 
 const ProductsCard = (props) => {
     const {id, image, title, description, price} = props;
@@ -14,7 +13,6 @@ const ProductsCard = (props) => {
     const addToCart = (product) => {
         console.log(product);
         dispatch(addCart(product));
-        toast.success("Product added to cart!");
     };
 
  return(
