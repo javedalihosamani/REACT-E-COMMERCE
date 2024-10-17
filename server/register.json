@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "7f96",
+      "name": "Jnanesh",
+      "email": "react@gmail.com",
+      "mobile": "9876543210",
+      "password": "12345"
+    }
+  ]
+}
