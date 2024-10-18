@@ -9,6 +9,7 @@ export const AuthContext = createContext();
 const AuthProvider = (props) => {
 
     const [users, setUsers] = useState([]);
+    const [loginStatus, setLoginStatus] = useState(false);
     //console.log(users);
 
     // Initialize User Data
@@ -26,7 +27,7 @@ const AuthProvider = (props) => {
 
     // Register Users
     const registerUser = async (user) => {
-        console.log(user);
+        //console.log(user);
 
         const exactEmail = users.find((item)=> item.email === user.email);
         const exactMobile = users.find((item)=> item.mobile === user.mobile);
@@ -40,7 +41,7 @@ const AuthProvider = (props) => {
           } else {
             let register =  await axios.post(`${URL}/users`, user);
             toast.success('Successfully Registered');
-            setTimeout(()=>{window.location.href = '/login';}, 3000);
+            //setTimeout(()=>{window.location.href = '/login';}, 3000);
             return register;
           }
         } catch (error) {
@@ -50,18 +51,32 @@ const AuthProvider = (props) => {
 
     // Login Users
     const loginUser = async (user) => {
-        console.log(user);
-        /* try {
-            return await axios.post(`${URL}/login`, user);
-        } catch (error) {
-            toast.error(error.message);
-        } */
+        
+        let exactID = users.map(user => user.id);
+        //let exactID = users.filter(item => item.id !== undefined);
+          
+        if(exactID){
+          console.log(exactID);
+          let login = users.find(item => item.email === user.email && item.password === user.password);
+          if (login) {
+            setLoginStatus(true);
+            toast.success('Successfully Logged In');
+            //setTimeout(()=>{window.location.href = '/';}, 3000);
+            return login;
+          } else {
+            toast.error('Invalid Credentials');
+            return;
+          }
+        }
     };
 
     // Logout Users
+    const logoutUser = async () => {
+      setLoginStatus(false);
+    }
 
   return (
-    <AuthContext.Provider value={{ registerUser, loginUser }}>
+    <AuthContext.Provider value={{ registerUser, loginUser, loginStatus, logoutUser, setLoginStatus }}>
       {props.children}
     </AuthContext.Provider>
   )

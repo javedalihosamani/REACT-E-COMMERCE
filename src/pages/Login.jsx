@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Footer, Header } from '../layout'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 
 const Login = () => {
@@ -14,9 +14,12 @@ const Login = () => {
     }
 
     let context = useContext(AuthContext)
+    let navigate = useNavigate();
+
     const submitLogin = (e) => {
         e.preventDefault();
         context.loginUser(login);
+        navigate('/');
     }
 
   return (
@@ -43,6 +46,7 @@ const Login = () => {
                                     id="email"
                                     name="email"
                                     placeholder="name@example.com"
+                                    required
                                     onChange={handleLogin}
                                 />
                             </div>
@@ -54,6 +58,7 @@ const Login = () => {
                                     id="password"
                                     name="password"
                                     placeholder="Password"
+                                    required
                                     onChange={handleLogin}
                                 />
                             </div>

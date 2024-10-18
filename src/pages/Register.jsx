@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Footer, Header } from '../layout';
 import { AuthContext } from '../context/AuthContext';
 
@@ -17,6 +17,7 @@ const Register = () => {
     }
 
     const context  = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const submitRegister = (e) => {
         e.preventDefault();
@@ -24,6 +25,7 @@ const Register = () => {
 
         // API call to register user
         context.registerUser(register);
+        navigate('/login');
     }
   return (
     <>
@@ -49,6 +51,7 @@ const Register = () => {
                                     id="name"
                                     name="name"
                                     placeholder="Enter Your Name"
+                                    required
                                     onChange={handleRegister}
                                 />
                             </div>
@@ -60,6 +63,7 @@ const Register = () => {
                                     id="email"
                                     name="email"
                                     placeholder="name@example.com"
+                                    required
                                     onChange={handleRegister}
                                 />
                             </div>
@@ -71,6 +75,7 @@ const Register = () => {
                                     id="mobile"
                                     name="mobile"
                                     placeholder="9876543210"
+                                    required
                                     onChange={handleRegister}
                                 />
                             </div>
@@ -82,6 +87,7 @@ const Register = () => {
                                     id="password"
                                     name="password"
                                     placeholder="Password"
+                                    required
                                     onChange={handleRegister}
                                 />
                             </div>
