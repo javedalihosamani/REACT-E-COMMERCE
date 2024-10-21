@@ -1,18 +1,25 @@
 import { faCartShopping, faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { addCart } from "../redux/action/ProductAction";
+import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const ProductsCard = (props) => {
     const {id, image, title, description, price} = props;
     
     const dispatch = useDispatch();
 
+    const context = useContext(AuthContext);
     const addToCart = (product) => {
         console.log(product);
-        dispatch(addCart(product));
+        if(context.loginStatus === false) {
+            toast.error(`Please login to add product to cart`);
+        } else {
+            dispatch(addCart(product));
+        }
     };
 
  return(
